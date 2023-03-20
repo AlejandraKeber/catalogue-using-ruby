@@ -8,4 +8,18 @@ class Item
         @publish_date = publish_date
         @archived = false
     end
+
+    def move_to_archive(item)
+        if can_be_archived?(item)
+            item.archived = true
+        else
+            item.archived = false
+        end
+    end
+
+    private
+
+    def can_be_archived?(item)
+        item.publish_date > 10
+    end
 end
