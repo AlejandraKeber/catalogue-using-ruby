@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <h3><b>School library</b></h3>
+  <h3><b>Catalog of my things</b></h3>
 
 </div>
 
@@ -16,7 +16,7 @@
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
-- [👥 Author](#authors)
+- [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐ Show your support](#support)
@@ -26,7 +26,7 @@
 
 # 📖 School library <a name="about-project"></a>
 
-**School library** is ruby app for a school library that let you record what books are in the library, who and when they borrows them.
+**Catalog of my things** is ruby app for .
 
 ## 🛠️ Built With <a name="built-with"></a>
 
@@ -62,19 +62,29 @@ Clone this repository to your desired folder:
 
 - Choose a local directory.
 - Open a Git Terminal.
-- write: git clone https://github.com/ShinhyoBelok/school-library.git
+- write: git clone https://github.com/PrangonGhose/catalogue-using-ruby.git
 - Open the repository with VS Code.
 - Install bundlers in terminal
 
 <!-- AUTHORS -->
 
-## 👥 Author <a name="authors"></a>
+## 👥 Authors <a name="authors"></a>
 
-👤 **Shinhyo**
+👤 **Shinhyo Belliard**
 
 - GitHub: [@ShinhyoBelok](https://github.com/ShinhyoBelok)
 - Twitter: [@Bell_iraki](https://twitter.com/Bell_iraki)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/shinhyo-belliard-okazaki-807a38249/)
+
+👤 **Prangon Ghose**
+
+- GitHub: [@PrangonGhose](https://github.com/PrangonGhose)
+- LinkedIn: [Prangon Ghose](https://www.linkedin.com/in/prangon-ghose/)
+
+👤 **Alejandra Keber Maggi**
+- GitHub: [@AlejandraKeber](https://github.com/AlejandraKeber)
+- Twitter: [@KeberAlejandra](https://twitter.com/KeberAlejandra)
+- LinkedIn: [alejandra-keber](www.linkedin.com/in/alejandra-keber)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
