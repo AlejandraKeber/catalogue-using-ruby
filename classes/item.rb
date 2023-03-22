@@ -2,11 +2,9 @@ require 'date'
 require_relative 'genre'
 
 class Item
-  attr_accessor :label
+  attr_accessor :label, :genre
   attr_reader :id, :author,
               :source, :publish_date, :archived
-  
-  attr_accessor :genre
 
   def initialize(genre, author, source, label, publish_date)
     @id = Time.now.to_i
