@@ -6,7 +6,7 @@ module AuthorModule
   @list_of_authors = []
 
   def add_author_ui
-    puts "*- Authors -*"
+    puts '*- Authors -*'
     list_all_authors
     print "\nSelect an author [number on the list] or create a new author [0]: "
     author = gets.chomp
@@ -36,8 +36,8 @@ module AuthorModule
   end
 
   def select_create_author(index)
-  index = index.to_i
-  return 'Invalid number' unless index <= @list_of_authors.length && index >= 0
+    index = index.to_i
+    return 'Invalid number' unless index <= @list_of_authors.length && index >= 0
 
     if index.zero?
       new_author = create_author
