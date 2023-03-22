@@ -30,7 +30,7 @@ module LabelModule
   end
 
   def filter_label(index)
-    list_all_label.each_with_index do |label, i|
+    @list_of_labels.each_with_index do |label, i|
       return label if i == index
     end
   end
