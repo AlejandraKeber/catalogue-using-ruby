@@ -1,7 +1,10 @@
 require_relative 'music_album'
 require_relative 'genre'
+require_relative 'create_genre'
 
 class App
+  include(CreateGenre)
+
   def initialize
     @music_albums = []
     @all_genre = []
@@ -15,15 +18,11 @@ class App
     end
   end
 
-  def list_all_genre
-    if @all_genre.empty?
-      puts 'No genre to display. You can add one.'
-    else
-      @all_genre.each { |genre| puts(" | Title: Genre: #{genre.name} | ") }
-    end
-  end
-
   def add_music_album
-    
+    genre = show_genre(@all_genre)
+    @all_genre << genre
+    print('Is it on spotify (Y/N): ')
+    spotify = gets.chomp
+    spotify = spotify != ('n' || 'N')
   end
 end
