@@ -1,3 +1,5 @@
+require './classes/app'
+
 class Main
   def menu
     puts "\n-----------------------------------\nPick an option by entering a number:"
@@ -16,14 +18,27 @@ class Main
     ")
   end
 
+  def run_menu(app, option)
+    case option
+    when 1
+      app.display_all_books
+    when 5
+      app.display_all_labels
+    when 7
+      app.add_book
+    else
+      puts 'Invalid option. Enter a valid number.'
+    end
+  end
+
   def main
     option = -1
-    app = App.new # not implemented
+    app = App.new
     until option.zero?
       menu
       option = gets.chomp.to_i
       puts ''
-      run_menu(app, option) unless option.zero? # not implemented
+      run_menu(app, option) unless option.zero?
     end
     puts 'Thank you for using this app'
   end
