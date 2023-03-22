@@ -2,8 +2,9 @@ require 'date'
 require_relative 'genre'
 
 class Item
+  attr_accessor :label
   attr_reader :id, :author,
-              :source, :label, :publish_date, :archived
+              :source, :publish_date, :archived
   
   attr_accessor :genre
 
