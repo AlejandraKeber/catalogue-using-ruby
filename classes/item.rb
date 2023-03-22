@@ -1,12 +1,16 @@
 require 'date'
+require_relative 'genre'
 
 class Item
-  attr_reader :id, :genre, :author,
+  attr_reader :id, :author,
               :source, :label, :publish_date, :archived
+  
+  attr_accessor :genre
 
   def initialize(genre, author, source, label, publish_date)
     @id = Time.now.to_i
     @genre = genre
+    genre.items << self
     @author = author
     @source = source
     @label = label
@@ -16,7 +20,6 @@ class Item
 
   def move_to_archive
     return unless can_be_archived?
-
     @archived = true
   end
 
