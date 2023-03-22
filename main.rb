@@ -22,10 +22,16 @@ class Main
     case option
     when 1
       app.display_all_books
+    when 3
+      app.display_all_games
     when 5
       app.display_all_labels
+    when 6
+      app.display_all_authors
     when 7
       app.add_book
+    when 10
+      app.add_game
     else
       puts 'Invalid option. Enter a valid number.'
     end

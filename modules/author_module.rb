@@ -1,4 +1,4 @@
-require_relative './classes/author'
+require './classes/author'
 
 module AuthorModule
   module_function
@@ -40,11 +40,11 @@ module AuthorModule
   return 'Invalid number' unless index <= @list_of_authors.length && index >= 0
 
     if index.zero?
-      new_label = create_label
-      @list_of_authors << new_label unless @list_of_authors.include?(new_label)
-      new_label
+      new_author = create_author
+      @list_of_authors << new_author unless @list_of_authors.include?(new_author)
+      new_author
     else
-      filter_label(index - 1)
+      filter_author(index - 1)
     end
   end
 end
