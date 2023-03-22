@@ -6,13 +6,11 @@ class Item
   attr_reader :id, :author,
               :source, :publish_date, :archived
 
-  def initialize(genre, author, source, label, publish_date)
+  def initialize(publish_date)
     @id = Time.now.to_i
     @genre = genre
     genre.items << self
     @author = author
-    @source = source
-    @label = label
     @publish_date = Date.parse(publish_date)
     @archived = false
   end
@@ -20,6 +18,11 @@ class Item
   def move_to_archive
     return unless can_be_archived?
     @archived = true
+  end
+
+  def add_label(label)
+    @label = label
+    label.add_item(self) unless label.items.include?(self)
   end
 
   private
