@@ -2,13 +2,11 @@ require 'date'
 require_relative 'genre'
 
 class Item
-  attr_accessor :label, :author, :genre
-  attr_reader :id, :publish_date, :archived
+  attr_accessor :label, :author, :genre, :id
+  attr_reader :publish_date, :archived
 
   def initialize(publish_date)
     @id = Time.now.to_i
-    @genre = genre
-    genre.items << self
     @publish_date = Date.parse(publish_date)
     @archived = false
   end
