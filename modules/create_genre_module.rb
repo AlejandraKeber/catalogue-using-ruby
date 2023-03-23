@@ -67,7 +67,7 @@ module CreateGenre
 
   def load_genre
     if JSON.parse(File.read('./data/genre.json')).any?
-      @all_genre = JSON.parse(File.read('./memory/genre.json')).map do |genre|
+      @all_genre = JSON.parse(File.read('./data/genre.json')).map do |genre|
         new_genre = Genre.new(genre['name'])
         new_genre.id = genre['id']
         new_genre
