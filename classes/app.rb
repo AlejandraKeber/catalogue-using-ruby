@@ -1,13 +1,15 @@
 require_relative 'music_album'
 require_relative 'genre'
-require_relative 'create_genre'
+require './modules/create_genre_module'
 require './modules/book_module'
 require './modules/label_module'
+require './modules/music_album_module'
 
 class App
   include CreateGenre
   include BookModule
   include LabelModule
+  include MusicAlbumModule
 
   def initialize
     @music_albums = []
@@ -26,7 +28,7 @@ class App
     LabelModule.list_all_labels
   end
 
-  def list_all_music_albums
+  def display_all_music_albums
     if @music_albums.empty?
       puts 'No music to display. You can add one.'
     else
@@ -34,11 +36,11 @@ class App
     end
   end
 
+  def display_all_genre
+    CreateGenre.list_all_genre(@all_genre)
+  end
+
   def add_music_album
-    genre = show_genre(@all_genre)
-    @all_genre << genre
-    print('Is it on spotify (Y/N): ')
-    spotify = gets.chomp
-    spotify = spotify != ('n' || 'N')
+    albums, genre = music_main(@music_albums, @all_genre)
   end
 end
