@@ -1,9 +1,10 @@
-require_relative 'genre'
+require './classes/genre'
+require 'json'
 
 module CreateGenre
   module_function
 
-  @all_genre = load_genre
+  @all_genre = []
 
   def show_genre(list_of_genre = @all_genre)
     puts('Select genre from the list:')
@@ -11,7 +12,7 @@ module CreateGenre
     puts("#{list_of_genre.length + 1}. Create a new genre")
     option = gets.chomp
     genre = select_genre(list_of_genre, option.to_i)
-    all_genre.push(genre) unless all_genre.include?(genre)
+    @all_genre.push(genre) unless @all_genre.include?(genre)
     genre
   end
 
@@ -39,9 +40,9 @@ module CreateGenre
     genre
   end
 
-  def return_genre(name)
+  def return_genre(id)
     @all_genre.each do |genre|
-      if genre.name == name
+      if genre.id == id
         genre
       end
     end
@@ -50,22 +51,27 @@ module CreateGenre
   def save_genre
     genre_list = []
     @all_genre.each do |genre|
+      list_of_item_ids = []
+      genre.items.each do |item|
+        list_of_item_ids.push(item.id)
+      end
       genre_obj = {
+        id: genre.id,
         name: genre.name,
-        items: genre.items
+        items: list_of_item_ids
       }
       genre_list << genre_obj
     end
-    File.write('./memory/genre.json', JSON.pretty_generate(genre_list))
+    File.write('./data/genre.json', JSON.pretty_generate(genre_list))
   end
 
   def load_genre
-    genre_list = []
-    if JSON.parse(File.read('./memory/genre.json')).any?
-      genre_list = JSON.parse(File.read('./memory/genre.json')).map do |genre|
-        Genre.new(genre['name']).add_item_list(genre['items'])
+    if JSON.parse(File.read('./data/genre.json')).any?
+      @all_genre = JSON.parse(File.read('./memory/genre.json')).map do |genre|
+        new_genre = Genre.new(genre['name'])
+        new_genre.id = genre['id']
+        new_genre
       end
     end
-    genre_list
   end
 end
