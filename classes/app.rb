@@ -62,8 +62,8 @@ class App
 
   def load_data
     BookModule.load_books
-    LabelModule.load_labels(BookModule.all_books)
     GameModule.load_games
+    LabelModule.load_labels(BookModule.all_books)
     AuthorModule.load_authors(GameModule.all_games)
     CreateGenre.load_genre
   end
