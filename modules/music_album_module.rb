@@ -34,7 +34,9 @@ module MusicAlbumModule
     if @music_albums.empty?
       puts 'No music to display. You can add one.'
     else
-      @music_albums.each { |music| puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ") }
+      @music_albums.each do |music|
+        puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ")
+      end
     end
   end
 
@@ -55,11 +57,11 @@ module MusicAlbumModule
   end
 
   def load_music_album
-    if JSON.parse(File.read('./memory/music_album.json')).any?
-      @music_albums = JSON.parse(File.read('./memory/music_album.json')).map do |album|
-        new_album = MusicAlbum.new(album['publish_date'], album['on_spotify'])
-        new_album
-      end
+    return unless JSON.parse(File.read('./memory/music_album.json')).any?
+
+    @music_albums = JSON.parse(File.read('./memory/music_album.json')).map do |album|
+      new_album = MusicAlbum.new(album['publish_date'], album['on_spotify'])
+      new_album
     end
   end
 end

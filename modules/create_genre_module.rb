@@ -30,21 +30,18 @@ module CreateGenre
     else
       print('Enter the name of the genre: ')
       name = gets.chomp
-      genre = new_genre(name)
-      genre
+      new_genre(name)
+
     end
   end
 
   def new_genre(name)
-    genre = Genre.new(name)
-    genre
+    Genre.new(name)
   end
 
   def return_genre(id)
     @all_genre.each do |genre|
-      if genre.id == id
-        genre
-      end
+      genre if genre.id == id
     end
   end
 
@@ -66,12 +63,12 @@ module CreateGenre
   end
 
   def load_genre
-    if JSON.parse(File.read('./data/genre.json')).any?
-      @all_genre = JSON.parse(File.read('./data/genre.json')).map do |genre|
-        new_genre = Genre.new(genre['name'])
-        new_genre.id = genre['id']
-        new_genre
-      end
+    return unless JSON.parse(File.read('./data/genre.json')).any?
+
+    @all_genre = JSON.parse(File.read('./data/genre.json')).map do |genre|
+      new_genre = Genre.new(genre['name'])
+      new_genre.id = genre['id']
+      new_genre
     end
   end
 end
