@@ -4,6 +4,7 @@ module LabelModule
   module_function
 
   @list_of_labels = []
+  @file = './data/labels_collection.json'
 
   def add_label_ui
     puts '*- Labels -*'
@@ -14,6 +15,7 @@ module LabelModule
   end
 
   def list_all_labels
+    puts '*- Labels -*'
     puts 'Label list is empty, please create a new one' if @list_of_labels.empty?
     @list_of_labels.each_with_index do |label, index|
       puts "#{index + 1} - Title: #{label.title} Color: #{label.color}"
@@ -46,5 +48,45 @@ module LabelModule
     else
       filter_label(index - 1)
     end
+  end
+
+  def filter_items(label, ids, all_books)
+    items = []
+    ids.each do |id|
+      book = all_books.find { |book_element| book_element.id == id }
+      if book
+        items << book
+        book.label = label
+      end
+      # games
+      # genre
+    end
+    items
+  end
+
+  def load_labels(all_books)
+    return unless File.exist?(@file) && !File.empty?(@file)
+
+    JSON.parse(File.read(@file)).each do |label|
+      new_label = Label.new(label['title'], label['color'])
+      new_label.id = label['id']
+      new_label.items = filter_items(new_label, label['items'], all_books)
+      @list_of_labels << new_label
+    end
+  end
+
+  def save_labels
+    File.new(@file, 'w') unless File.exist?(@file)
+    data = []
+
+    @list_of_labels.each do |label|
+      items_ids = []
+      label.items.each do |item|
+        items_ids << item.id
+      end
+      data.push({ id: label.id, title: label.title, color: label.color,
+                  items: items_ids })
+    end
+    File.write(@file, JSON.generate(data))
   end
 end
