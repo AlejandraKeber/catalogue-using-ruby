@@ -52,6 +52,16 @@ class App
   end
 
   def save_data
+    BookModule.save_books
+    LabelModule.save_labels
+  end
+
+  def load_data
+    BookModule.load_books
+    LabelModule.load_labels(BookModule.all_books)
+  end
+
+  def save_data
     CreateGenre.save_genre
     MusicAlbumModule.save_music_album
   end

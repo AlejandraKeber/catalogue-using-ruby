@@ -43,14 +43,21 @@ class Main
     end
   end
 
+  def wait_user
+    print "\n\n Press any key to continue"
+    gets.chomp
+  end
+
   def main
     option = -1
     app = App.new
+    app.load_data
     until option.zero?
       menu
       option = gets.chomp.to_i
       puts ''
       run_menu(app, option) unless option.zero?
+      wait_user unless option.zero?
     end
     app.save_data
     puts 'Thank you for using this app'
