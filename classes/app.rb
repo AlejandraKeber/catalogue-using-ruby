@@ -56,11 +56,15 @@ class App
     LabelModule.save_labels
     CreateGenre.save_genre
     MusicAlbumModule.save_music_album
+    GameModule.save_games
+    AuthorModule.save_authors
   end
 
   def load_data
     BookModule.load_books
+    GameModule.load_games
     LabelModule.load_labels(BookModule.all_books)
+    AuthorModule.load_authors(GameModule.all_games)
     CreateGenre.load_genre
   end
 end
