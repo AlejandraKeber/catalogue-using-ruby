@@ -1,7 +1,7 @@
 require_relative 'item'
 
 class Label
-  attr_accessor :title, :color, :items
+  attr_accessor :title, :color, :items, :id
 
   def initialize(title, color)
     @id = Time.now.to_i
