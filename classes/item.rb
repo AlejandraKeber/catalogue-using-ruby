@@ -2,15 +2,13 @@ require 'date'
 require_relative 'genre'
 
 class Item
-  attr_accessor :label, :genre
-  attr_reader :id, :author,
-              :publish_date, :archived
+  attr_accessor :label, :author, :genre
+  attr_reader :id, :publish_date, :archived
 
   def initialize(publish_date)
     @id = Time.now.to_i
     @genre = genre
     genre.items << self
-    @author = author
     @publish_date = Date.parse(publish_date)
     @archived = false
   end
@@ -23,6 +21,11 @@ class Item
   def add_label(label)
     @label = label
     label.add_item(self) unless label.items.include?(self)
+  end
+
+  def add_author(author)
+    @author = author
+    author.add_item(self) unless author.items.include?(self)
   end
 
   private

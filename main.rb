@@ -26,12 +26,18 @@ class Main
       app.display_all_music_albums
     when 4
       app.display_all_genre
+    when 3
+      app.display_all_games
     when 5
       app.display_all_labels
+    when 6
+      app.display_all_authors
     when 7
       app.add_book
     when 8
       app.add_music_album
+    when 10
+      app.add_game
     else
       puts 'Invalid option. Enter a valid number.'
     end

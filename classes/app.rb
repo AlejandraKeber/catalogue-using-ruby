@@ -3,12 +3,17 @@ require_relative 'genre'
 require './modules/create_genre_module'
 require './modules/book_module'
 require './modules/label_module'
+require './modules/game_module'
+require './modules/author_module'
 require './modules/music_album_module'
 
 class App
   include CreateGenre
   include BookModule
   include LabelModule
+  include GameModule
+  include AuthorModule
+
   include MusicAlbumModule
 
   def initialize
@@ -42,5 +47,17 @@ class App
 
   def add_music_album
     albums, genre = music_main(@music_albums, @all_genre)
+  end
+
+  def add_game
+    GameModule.option_add_game
+  end
+
+  def display_all_games
+    GameModule.list_all_games
+  end
+
+  def display_all_authors
+    AuthorModule.list_all_authors
   end
 end

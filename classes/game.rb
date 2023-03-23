@@ -11,12 +11,6 @@ class Game < Item
   end
 
   def can_be_archived?
-    super || @last_played_at > 2
+    super && @last_played_at > 2
   end
 end
-
-game = Game.new('game', 'Alejandra', 'source', 'label', '2019-12-12', 'yes', 1)
-puts game.can_be_archived?
-
-game = Game.new('game', 'Alejandra', 'source', 'label', '2019-12-12', 'yes', 5)
-puts game.can_be_archived?
