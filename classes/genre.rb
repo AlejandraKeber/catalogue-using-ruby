@@ -1,5 +1,5 @@
 class Genre
-  attr_accessor :items, :name
+  attr_accessor :items, :name, :id
 
   def initialize(name)
     @id = Time.now.to_i
@@ -10,9 +10,5 @@ class Genre
   def add_item(item)
     @items.push(item)
     item.genre = self
-  end
-
-  def add_item_list(item_list)
-    @items = item_list
   end
 end
