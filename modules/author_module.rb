@@ -49,6 +49,7 @@ module AuthorModule
       filter_author(index - 1)
     end
   end
+
   def filter_items(author, ids, all_games)
     items = []
     ids.each do |id|
@@ -57,8 +58,8 @@ module AuthorModule
         items << game
         game.author = author
       end
-      #label
-      #genre
+      # label
+      # genre
     end
     items
   end
@@ -66,12 +67,12 @@ module AuthorModule
   def load_authors(all_games)
     return unless File.exist?(@file) && !File.empty?(@file)
 
-      JSON.parse(File.read(@file)).each do |author|
-        new_author = Author.new(author['multiplayer'], author['last_played_at'])
-        new_author.id = author['id']
-        new_author.items = filter_items(new_author, author['items'], all_games)
-        @list_of_authors << new_author
-      end
+    JSON.parse(File.read(@file)).each do |author|
+      new_author = Author.new(author['first_name'], author['last_name'])
+      new_author.id = author['id']
+      new_author.items = filter_items(new_author, author['items'], all_games)
+      @list_of_authors << new_author
+    end
   end
 
   def save_authors
@@ -83,7 +84,8 @@ module AuthorModule
       author.items.each do |item|
         items_ids << item.id
       end
-      data.push({ id: author.id, first_name: author.first_name, last_name: author.last_name })
+      data.push({ id: author.id, first_name: author.first_name, last_name: author.last_name,
+                  items: items_ids })
     end
     File.write(@file, JSON.generate(data))
   end

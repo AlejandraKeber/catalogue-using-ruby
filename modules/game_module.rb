@@ -41,22 +41,21 @@ module GameModule
   def load_games
     return unless File.exist?(@file) && !File.empty?(@file)
 
-      JSON.parse(File.read(@file)).each do |game|
-        new_game = Game.new(game['publish_date'], game['multiplayer'], game['last_played_at'])
-        new_game.id = game['id']
-        new_game.archived = game['archived']
-        @list_of_games << new_game
-      end
+    JSON.parse(File.read(@file)).each do |game|
+      new_game = Game.new(game['publish_date'], game['multiplayer'], game['last_played_at'])
+      new_game.id = game['id']
+      new_game.archived = game['archived']
+      @list_of_games << new_game
+    end
   end
 
   def save_games
     File.new(@file, 'w') unless File.exist?(@file)
     data = []
     @list_of_games.each do |game|
-      data.push({ id: game.id, publish_date: game.publish_date, multiplayer: game.multiplayer, 
-                  last_played_at: game.last_played_at, archived: game.archived, author: game.author.id})
+      data.push({ id: game.id, publish_date: game.publish_date, multiplayer: game.multiplayer,
+                  last_played_at: game.last_played_at, archived: game.archived, author: game.author.id })
     end
     File.write(@file, JSON.generate(data))
   end
 end
-

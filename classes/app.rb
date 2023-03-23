@@ -36,10 +36,14 @@ class App
   def save_data
     BookModule.save_books
     LabelModule.save_labels
+    GameModule.save_games
+    AuthorModule.save_authors
   end
 
   def load_data
     BookModule.load_books
     LabelModule.load_labels(BookModule.all_books)
+    GameModule.load_games
+    AuthorModule.load_authors(GameModule.all_games)
   end
 end
