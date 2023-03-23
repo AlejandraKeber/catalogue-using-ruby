@@ -4,7 +4,7 @@ require_relative 'genre'
 class Item
   attr_accessor :label, :genre
   attr_reader :id, :author,
-              :source, :publish_date, :archived
+              :publish_date, :archived
 
   def initialize(publish_date)
     @id = Time.now.to_i
