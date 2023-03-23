@@ -12,38 +12,41 @@ CREATE TABLE item (
 );
 
 CREATE TABLE game (  
-  id INT GENERATED ALWAYS AS IDENTITY,
+  id INT,
   multiplayer BOOLEAN,
   last_played DATE,
-  PRIMARY KEY (id)
+  FOREIGN KEY(id) REFERENCES item(id)
 );
 
-CREATE TABLE book (  
-  id INT GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE book ( 
+  id INT,
   publisher VARCHAR(250),
   cover_state VARCHAR(250),
-  PRIMARY KEY (id)
+  FOREIGN KEY(id) REFERENCES item(id)
 );
 
 CREATE TABLE music_albums (  
-  id INT GENERATED ALWAYS AS IDENTITY,
+  id INT,
   on_spotify BOOLEAN,
-  PRIMARY KEY (id)
+  FOREIGN KEY(id) REFERENCES item(id)
 );
 
 CREATE TABLE author (
   id INT GENERATED ALWAYS AS IDENTITY,
   first_name VARCHAR(250),
   last_name VARCHAR(250)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE label (
   id INT GENERATED ALWAYS AS IDENTITY,
   title VARCHAR(250),
   color VARCHAR(250)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE genre (
   id INT GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(250)
+  PRIMARY KEY (id)
 );
