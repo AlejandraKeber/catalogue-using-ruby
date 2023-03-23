@@ -15,4 +15,14 @@ class App
   def display_all_labels
     LabelModule.list_all_labels
   end
+
+  def save_data
+    BookModule.save_books
+    LabelModule.save_labels
+  end
+
+  def load_data
+    BookModule.load_books
+    LabelModule.load_labels(BookModule.all_books)
+  end
 end
