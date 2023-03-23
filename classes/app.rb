@@ -32,4 +32,14 @@ class App
   def display_all_authors
     AuthorModule.list_all_authors
   end
+
+  def save_data
+    BookModule.save_books
+    LabelModule.save_labels
+  end
+
+  def load_data
+    BookModule.load_books
+    LabelModule.load_labels(BookModule.all_books)
+  end
 end
