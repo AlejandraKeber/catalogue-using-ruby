@@ -2,13 +2,14 @@ require_relative 'create_genre_module'
 require_relative 'label_module'
 require './classes/music_album'
 require_relative 'author_module'
+require 'json'
 
 module MusicAlbumModule
   module_function
 
   include CreateGenre
   include LabelModule
-  incluce AuthorModule
+  include AuthorModule
 
   @music_albums = []
 
@@ -25,7 +26,7 @@ module MusicAlbumModule
     new_album.add_label(label)
     new_album.add_author(author)
     new_album.add_genre(genre)
-    @music_album.push(new_album)
+    @music_albums.push(new_album)
     puts 'New Music Album created!'
   end
 
@@ -39,19 +40,18 @@ module MusicAlbumModule
 
   def save_music_album
     album_list = []
-    @music_album.each do |album|
+    @music_albums.each do |album|
       album_obj = {
-        genre: album.genre.name,
-        author_first_name: album.author.first_name,
-        author_last_name: album.author.last_name,
-        label_title: album.label.title,
-        label_color: album.label.color,
+        id: album.id,
+        genre: album.genre.id,
+        author: album.author.id,
+        label: album.label.id,
         publish_date: album.publish_date,
         on_spotify: album.on_spotify
       }
       album_list << album_obj
     end
-    File.write('./memory/music_album.json', JSON.pretty_generate(album_list))
+    File.write('./data/music_album.json', JSON.pretty_generate(album_list))
   end
 
   def load_music_album
