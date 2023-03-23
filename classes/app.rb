@@ -20,7 +20,7 @@ class App
   def display_all_labels
     LabelModule.list_all_labels
   end
-  
+
   def add_game
     GameModule.option_add_game
   end
@@ -31,7 +31,8 @@ class App
 
   def display_all_authors
     AuthorModule.list_all_authors
-    
+  end
+
   def save_data
     BookModule.save_books
     LabelModule.save_labels
