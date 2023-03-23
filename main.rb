@@ -18,10 +18,14 @@ class Main
     ")
   end
 
-  def run_menu(app, option)
+  def run_menu(app, option) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
     case option
     when 1
       app.display_all_books
+    when 2
+      app.display_all_music_albums
+    when 4
+      app.display_all_genre
     when 3
       app.display_all_games
     when 5
@@ -30,6 +34,8 @@ class Main
       app.display_all_authors
     when 7
       app.add_book
+    when 8
+      app.add_music_album
     when 10
       app.add_game
     else
