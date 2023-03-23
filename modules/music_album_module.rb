@@ -35,7 +35,7 @@ module MusicAlbumModule
       puts 'No music to display. You can add one.'
     else
       @music_albums.each do |music|
-        puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ")
+        puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ") # rubocop:disable Layout/LineLength
       end
     end
   end

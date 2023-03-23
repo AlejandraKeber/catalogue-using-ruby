@@ -18,7 +18,7 @@ class Main
     ")
   end
 
-  def run_menu(app, option) #rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
+  def run_menu(app, option) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
     case option
     when 1
       app.display_all_books
