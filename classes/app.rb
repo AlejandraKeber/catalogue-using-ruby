@@ -53,5 +53,6 @@ class App
 
   def save_data
     CreateGenre.save_genre
+    MusicAlbumModule.save_music_album
   end
 end
