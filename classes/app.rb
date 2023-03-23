@@ -13,13 +13,7 @@ class App
   include LabelModule
   include GameModule
   include AuthorModule
-
   include MusicAlbumModule
-
-  def initialize
-    @music_albums = []
-    @all_genre = []
-  end
 
   def add_book
     BookModule.option_add_book
@@ -34,19 +28,15 @@ class App
   end
 
   def display_all_music_albums
-    if @music_albums.empty?
-      puts 'No music to display. You can add one.'
-    else
-      @music_albums.each { |music| puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ") }
-    end
+    MusicAlbumModule.list_all_albums
   end
 
   def display_all_genre
-    CreateGenre.list_all_genre(@all_genre)
+    CreateGenre.list_all_genre
   end
 
   def add_music_album
-    albums, genre = music_main(@music_albums, @all_genre)
+    MusicAlbumModule.music_main
   end
 
   def add_game
@@ -59,5 +49,9 @@ class App
 
   def display_all_authors
     AuthorModule.list_all_authors
+  end
+
+  def save_data
+    CreateGenre.save_genre
   end
 end
