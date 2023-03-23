@@ -55,10 +55,10 @@ module MusicAlbumModule
   end
 
   def load_music_album
-    album_list = []
     if JSON.parse(File.read('./memory/music_album.json')).any?
-      album_list = JSON.parse(File.read('./memory/music_album.json')).map do |album|
-        genre = CreateGenre.return_genre(album['genre'])
+      @music_albums = JSON.parse(File.read('./memory/music_album.json')).map do |album|
+        new_album = MusicAlbum.new(album['publish_date'], album['on_spotify'])
+        new_album
       end
     end
   end
