@@ -55,7 +55,7 @@ module GameModule
     data = []
     @list_of_games.each do |game|
       data.push({ id: game.id, publish_date: game.publish_date, multiplayer: game.multiplayer,
-                  last_played_at: game.last_played_at, archived: game.archived, 
+                  last_played_at: game.last_played_at, archived: game.archived,
                   author: game.author.id })
     end
     File.write(@file, JSON.generate(data))
