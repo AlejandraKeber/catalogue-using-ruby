@@ -28,6 +28,11 @@ class Item
     author.add_item(self) unless author.items.include?(self)
   end
 
+  def add_genre(genre)
+    @genre = genre
+    genre.add_item(self) unless genre.items.include?(self)
+  end
+
   private
 
   def can_be_archived?
