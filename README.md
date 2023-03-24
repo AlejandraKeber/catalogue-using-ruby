@@ -53,6 +53,14 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+Click [here](https://drive.google.com/file/d/1qMN3X6amC4gjJSWvXy1oDyuf-1pqK_Rs/view?usp=share_link) to view the presentation of the project.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started
@@ -123,6 +131,11 @@ This website is applicable for both mobile and desktop version.
 - LinkedIn: [alejandra-keber](www.linkedin.com/in/alejandra-keber)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- [ ] **Removing selected items (book, game, albums)**
+- [ ] **Add genre, label and author to selected items**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
