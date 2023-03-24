@@ -37,7 +37,7 @@ module BookModule
       puts "\n[#{index}] - Cover state: #{book.cover_state} Publisher: #{book.publisher}"
       puts "      Publish date: #{book.publish_date} Label: #{book.label.title}"
       puts "      Author: #{book.author.first_name} #{book.author.last_name}"
-      # puts "      Genre: #{book.genre.name}\n"
+      puts "      Genre: #{book.genre.name}\n"
     end
   end
 

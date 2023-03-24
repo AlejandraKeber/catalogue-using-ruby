@@ -40,7 +40,7 @@ module GameModule
       puts "      Multiplayer: #{game.multiplayer}\n"
       puts "      Author: #{game.author.first_name} #{game.author.last_name}"
       puts "      Label: #{game.label.title}"
-      # puts "      Genre: #{game.genre.name}\n"
+      puts "      Genre: #{game.genre.name}\n"
     end
   end
 
