@@ -49,12 +49,12 @@ module AuthorModule
     end
   end
 
-  def filter_items(author, ids, all_games, all_books)
+  def filter_items(author, ids, all_games, all_books, all_albums) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }
       game = all_games.find { |game_element| game_element.id == id }
-      # music
+      album = all_albums.find { |album_element| album_element.id == id }
 
       if game
         items << game
@@ -62,18 +62,21 @@ module AuthorModule
       elsif book
         items << book
         book.author = author
+      elsif album
+        items << album
+        album.author = author
       end
     end
     items
   end
 
-  def load_authors(all_games, all_books)
+  def load_authors(all_games, all_books, all_albums)
     return unless File.exist?(@file) && !File.empty?(@file)
 
     JSON.parse(File.read(@file)).each do |author|
       new_author = Author.new(author['first_name'], author['last_name'])
       new_author.id = author['id']
-      new_author.items = filter_items(new_author, author['items'], all_games, all_books)
+      new_author.items = filter_items(new_author, author['items'], all_games, all_books, all_albums)
       @list_of_authors << new_author
     end
   end
