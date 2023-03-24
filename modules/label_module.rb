@@ -49,12 +49,12 @@ module LabelModule
     end
   end
 
-  def filter_items(label, ids, all_books, all_games)
+  def filter_items(label, ids, all_books, all_games, all_albums)
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }
       game = all_games.find { |game_element| game_element.id == id }
-      # music
+      album = all_albums.find { |album_element| album_element.id == id }
 
       if book
         items << book
@@ -62,18 +62,21 @@ module LabelModule
       elsif game
         items << game
         game.label = label
+      elsif album
+        items << album
+        album.label = label
       end
     end
     items
   end
 
-  def load_labels(all_books, all_games)
+  def load_labels(all_books, all_games, all_albums)
     return unless File.exist?(@file) && !File.empty?(@file)
 
     JSON.parse(File.read(@file)).each do |label|
       new_label = Label.new(label['title'], label['color'])
       new_label.id = label['id']
-      new_label.items = filter_items(new_label, label['items'], all_books, all_games)
+      new_label.items = filter_items(new_label, label['items'], all_books, all_games, all_albums)
       @list_of_labels << new_label
     end
   end
