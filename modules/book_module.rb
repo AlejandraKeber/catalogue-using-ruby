@@ -1,12 +1,16 @@
 require 'json'
 require './classes/book'
 require_relative 'label_module'
+require_relative 'author_module'
+require_relative 'create_genre_module'
 require_relative 'date_module'
 
 module BookModule
   module_function
 
   include LabelModule
+  include AuthorModule
+  include CreateGenre
   include DateModule
 
   @list_of_books = []
@@ -19,8 +23,9 @@ module BookModule
     print 'Publisher: '
     publisher = gets.chomp
     book = Book.new(DateModule.correct_date_format, publisher, cover_state)
-    label = LabelModule.add_label_ui
-    book.add_label(label)
+    book.add_label(LabelModule.add_label_ui)
+    book.add_author(AuthorModule.add_author_ui)
+    book.add_genre(CreateGenre.show_genre)
     @list_of_books << book
     puts 'Book successfully created!'
   end
@@ -30,7 +35,9 @@ module BookModule
     puts 'Books list is empty' if @list_of_books.empty?
     @list_of_books.each_with_index do |book, index|
       puts "\n[#{index}] - Cover state: #{book.cover_state} Publisher: #{book.publisher}"
-      puts "      Publish date: #{book.publish_date} Label: #{book.label.title}\n"
+      puts "      Publish date: #{book.publish_date} Label: #{book.label.title}"
+      puts "      Author: #{book.author.first_name} #{book.author.last_name}"
+      puts "      Genre: #{book.genre.name}\n"
     end
   end
 
@@ -55,7 +62,7 @@ module BookModule
     @list_of_books.each do |book|
       data.push({ id: book.id, publisher: book.publisher, cover_state: book.cover_state,
                   publish_date: book.publish_date, archived: book.archived,
-                  label: book.label.id }) # missing genre and author
+                  label: book.label.id, author: book.author.id, genre: book.genre.id })
     end
     File.write(@file, JSON.generate(data))
   end

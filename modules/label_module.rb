@@ -7,7 +7,6 @@ module LabelModule
   @file = './data/labels_collection.json'
 
   def add_label_ui
-    puts '*- Labels -*'
     list_all_labels
     print "\nSelect a label [number on the list] or create a new label [0]: "
     label = gets.chomp
@@ -50,27 +49,31 @@ module LabelModule
     end
   end
 
-  def filter_items(label, ids, all_books)
+  def filter_items(label, ids, all_books, all_games)
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }
+      game = all_games.find { |game_element| game_element.id == id }
+      # music
+
       if book
         items << book
         book.label = label
+      elsif game
+        items << game
+        book.label = label
       end
-      # games
-      # genre
     end
     items
   end
 
-  def load_labels(all_books)
+  def load_labels(all_books, all_games)
     return unless File.exist?(@file) && !File.empty?(@file)
 
     JSON.parse(File.read(@file)).each do |label|
       new_label = Label.new(label['title'], label['color'])
       new_label.id = label['id']
-      new_label.items = filter_items(new_label, label['items'], all_books)
+      new_label.items = filter_items(new_label, label['items'], all_books, all_games)
       @list_of_labels << new_label
     end
   end
