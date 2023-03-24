@@ -7,7 +7,6 @@ module AuthorModule
   @file = './data/authors_collection.json'
 
   def add_author_ui
-    puts '*- Authors -*'
     list_all_authors
     print "\nSelect an author [number on the list] or create a new author [0]: "
     author = gets.chomp
@@ -32,7 +31,7 @@ module AuthorModule
   end
 
   def filter_author(index)
-    @list_all_author.each_with_index do |author, i|
+    @list_of_authors.each_with_index do |author, i|
       return author if i == index
     end
   end
@@ -50,27 +49,31 @@ module AuthorModule
     end
   end
 
-  def filter_items(author, ids, all_games)
+  def filter_items(author, ids, all_games, all_books)
     items = []
     ids.each do |id|
+      book = all_books.find { |book_element| book_element.id == id }
       game = all_games.find { |game_element| game_element.id == id }
+      # music
+
       if game
         items << game
         game.author = author
+      elsif book
+        items << book
+        book.author = author
       end
-      # label
-      # genre
     end
     items
   end
 
-  def load_authors(all_games)
+  def load_authors(all_games, all_books)
     return unless File.exist?(@file) && !File.empty?(@file)
 
     JSON.parse(File.read(@file)).each do |author|
       new_author = Author.new(author['first_name'], author['last_name'])
       new_author.id = author['id']
-      new_author.items = filter_items(new_author, author['items'], all_games)
+      new_author.items = filter_items(new_author, author['items'], all_games, all_books)
       @list_of_authors << new_author
     end
   end

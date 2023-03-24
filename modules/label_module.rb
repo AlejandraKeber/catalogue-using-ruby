@@ -61,7 +61,7 @@ module LabelModule
         book.label = label
       elsif game
         items << game
-        book.label = label
+        game.label = label
       end
     end
     items

@@ -64,7 +64,7 @@ class App
     BookModule.load_books
     GameModule.load_games
     LabelModule.load_labels(BookModule.all_books, GameModule.all_games)
-    AuthorModule.load_authors(GameModule.all_games)
-    CreateGenre.load_genre
+    AuthorModule.load_authors(GameModule.all_games, BookModule.all_books)
+    # CreateGenre.load_genre
   end
 end

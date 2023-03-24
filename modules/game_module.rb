@@ -1,11 +1,17 @@
 require 'json'
 require './classes/game'
 require_relative 'author_module'
+require_relative 'label_module'
+require_relative 'create_genre_module'
+require_relative 'date_module'
 
 module GameModule
   module_function
 
   include AuthorModule
+  include LabelModule
+  include CreateGenre
+  include DateModule
 
   @list_of_games = []
   @file = './data/games_collection.json'
@@ -19,10 +25,10 @@ module GameModule
     print 'Published Date (YYYY-MM-DD): '
     publish_date = gets.chomp
     game = Game.new(publish_date, multiplayer, last_played_at)
-    author = AuthorModule.add_author_ui
-    game.add_author(author)
+    game.add_label(LabelModule.add_label_ui)
+    game.add_author(AuthorModule.add_author_ui)
+    game.add_genre(CreateGenre.show_genre)
     @list_of_games << game
-
     puts 'Game successfully created!'
   end
 
@@ -30,8 +36,11 @@ module GameModule
     puts "\n*- Games list -*"
     puts 'Game list is empty' if @list_of_games.empty?
     @list_of_games.each_with_index do |game, index|
-      puts "[#{index}] - Publish date: #{game.publish_date} Last played: #{game.last_played_at}
-    Multiplayer: #{game.multiplayer}\n"
+      puts "[#{index}] - Publish date: #{game.publish_date} Last played: #{game.last_played_at} "
+      puts "      Multiplayer: #{game.multiplayer}\n"
+      puts "      Author: #{game.author.first_name} #{game.author.last_name}"
+      puts "      Label: #{game.label.title}"
+      # puts "      Genre: #{game.genre.name}\n"
     end
   end
 
@@ -56,7 +65,7 @@ module GameModule
     @list_of_games.each do |game|
       data.push({ id: game.id, publish_date: game.publish_date, multiplayer: game.multiplayer,
                   last_played_at: game.last_played_at, archived: game.archived,
-                  author: game.author.id })
+                  author: game.author.id, label: game.label.id, genre: game.genre.id })
     end
     File.write(@file, JSON.generate(data))
   end
