@@ -14,7 +14,7 @@ describe Label do
 
   context 'When testing Label methods' do
     it 'add_item should add the item to the items array and set self to item.label property' do
-      item = Item.new('Action', 'G. Martin', 'Song of ice and fire', 'label', '1996-08-01')
+      item = Item.new('1996-08-01')
       label.add_item(item)
       expect(label.items).to eq [item]
       expect(item.label).to eq label
