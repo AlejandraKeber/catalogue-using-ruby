@@ -9,7 +9,7 @@ module CreateGenre
   def show_genre(list_of_genre = @all_genre)
     puts('Select genre from the list:')
     list_all_genre(list_of_genre)
-    puts("#{list_of_genre.length + 1}. Create a new genre")
+    puts("Enter [#{list_of_genre.length}] Create a new genre")
     option = gets.chomp
     genre = select_genre(list_of_genre, option.to_i)
     @all_genre.push(genre) unless @all_genre.include?(genre)
@@ -59,15 +59,38 @@ module CreateGenre
       }
       genre_list << genre_obj
     end
+    File.new('./data/genre.json', 'w') unless File.exist?('./data/genre.json')
     File.write('./data/genre.json', JSON.pretty_generate(genre_list))
   end
 
-  def load_genre
-    return unless JSON.parse(File.read('./data/genre.json')).any?
+  def filter_items(genre, ids, all_books, all_games, all_albums)
+    items = []
+    ids.each do |id|
+      book = all_books.find { |book_element| book_element.id == id }
+      game = all_games.find { |game_element| game_element.id == id }
+      album = all_albums.find { |album_element| album_element.id == id }
+
+      if book
+        items << book
+        book.genre = genre
+      elsif game
+        items << game
+        game.genre = genre
+      elsif album
+        items << album
+        album.genre = genre
+      end
+    end
+    items
+  end
+
+  def load_genre(all_books, all_games, all_albums)
+    return unless File.exist?('./data/genre.json') && !File.empty?('./data/genre.json')
 
     @all_genre = JSON.parse(File.read('./data/genre.json')).map do |genre|
       new_genre = Genre.new(genre['name'])
       new_genre.id = genre['id']
+      new_genre.items = filter_items(new_genre, genre['items'], all_books, all_games, all_albums)
       new_genre
     end
   end
