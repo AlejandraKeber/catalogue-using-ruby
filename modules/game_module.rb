@@ -36,10 +36,11 @@ module GameModule
     puts "\n*- Games list -*"
     puts 'Game list is empty' if @list_of_games.empty?
     @list_of_games.each_with_index do |game, index|
-      puts "[#{index}] - Publish date: #{game.publish_date} Last played: #{game.last_played_at} Multiplayer: #{game.multiplayer}\n"
+      puts "[#{index}] - Publish date: #{game.publish_date} Last played: #{game.last_played_at} "
+      puts "      Multiplayer: #{game.multiplayer}\n"
       puts "      Author: #{game.author.first_name} #{game.author.last_name}"
       puts "      Label: #{game.label.title}"
-      #puts "      Genre: #{game.genre.name}\n"
+      # puts "      Genre: #{game.genre.name}\n"
     end
   end
 
