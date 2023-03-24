@@ -35,9 +35,13 @@ module MusicAlbumModule
       puts 'No music to display. You can add one.'
     else
       @music_albums.each do |music|
-        puts(" | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ") # rubocop:disable Layout/LineLength
+        puts(" [#{music.class}] | Title: #{music.label.title} Author: #{music.author.first_name} #{music.author.last_name} Genre: #{music.genre.name} | ") # rubocop:disable Layout/LineLength
       end
     end
+  end
+
+  def all_albums
+    @music_albums
   end
 
   def save_music_album
@@ -53,14 +57,16 @@ module MusicAlbumModule
       }
       album_list << album_obj
     end
+    File.new('./data/music_album.json', 'w') unless File.exist?('./data/music_album.json')
     File.write('./data/music_album.json', JSON.pretty_generate(album_list))
   end
 
   def load_music_album
-    return unless JSON.parse(File.read('./memory/music_album.json')).any?
+    return unless File.exist?('./data/music_album.json') && !File.empty?('./data/music_album.json')
 
-    @music_albums = JSON.parse(File.read('./memory/music_album.json')).map do |album|
+    @music_albums = JSON.parse(File.read('./data/music_album.json')).map do |album|
       new_album = MusicAlbum.new(album['publish_date'], album['on_spotify'])
+      new_album.id = album['id']
       new_album
     end
   end
