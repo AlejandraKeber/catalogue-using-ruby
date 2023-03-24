@@ -12,8 +12,7 @@ class Main
     6  - List all authors
     7  - Add a book
     8  - Add a music album
-    9  - Add a movie
-    10 - Add a game
+    9  - Add a game
     0  - Exit
     ")
   end
@@ -36,7 +35,7 @@ class Main
       app.add_book
     when 8
       app.add_music_album
-    when 10
+    when 9
       app.add_game
     else
       puts 'Invalid option. Enter a valid number.'
