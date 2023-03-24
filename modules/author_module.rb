@@ -49,7 +49,7 @@ module AuthorModule
     end
   end
 
-  def filter_items(author, ids, all_games, all_books, all_albums)
+  def filter_items(author, ids, all_games, all_books, all_albums) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }

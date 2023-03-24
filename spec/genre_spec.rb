@@ -14,7 +14,7 @@ describe 'Test genre class' do
     expect(genre.name).to eql 'Rock'
   end
 
-  it "The item list should have a length of 1" do
+  it 'The item list should have a length of 1' do
     expect(genre.items.length).to be(1)
   end
 end

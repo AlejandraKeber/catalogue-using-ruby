@@ -49,7 +49,7 @@ module LabelModule
     end
   end
 
-  def filter_items(label, ids, all_books, all_games, all_albums)
+  def filter_items(label, ids, all_books, all_games, all_albums) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }

@@ -63,7 +63,7 @@ module CreateGenre
     File.write('./data/genre.json', JSON.pretty_generate(genre_list))
   end
 
-  def filter_items(genre, ids, all_books, all_games, all_albums)
+  def filter_items(genre, ids, all_books, all_games, all_albums) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     items = []
     ids.each do |id|
       book = all_books.find { |book_element| book_element.id == id }
